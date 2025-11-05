@@ -1,7 +1,6 @@
 from flask import Flask, jsonify
 from routes.auth import auth_bp
 from routes.tasks import tasks_bp
-from middleware.auth import token_required
 from datetime import datetime
 
 app = Flask(__name__)

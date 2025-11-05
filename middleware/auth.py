@@ -7,7 +7,6 @@ def token_required(f):
     def decorated(*args, **kwargs):
         token = None
         
-        # Check for token in Authorization header
         if 'Authorization' in request.headers:
             auth_header = request.headers['Authorization']
             try:
@@ -19,7 +18,6 @@ def token_required(f):
             return jsonify({'error': 'Token is missing'}), 401
         
         try:
-            # Decode the token
             data = jwt.decode(
                 token, 
                 current_app.config['SECRET_KEY'], 

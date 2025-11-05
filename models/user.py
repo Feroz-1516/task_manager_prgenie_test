@@ -1,20 +1,24 @@
 import uuid
 from datetime import datetime
+from werkzeug.security import generate_password_hash, check_password_hash
 
-# In-memory database (replace with real DB in production)
+# In-memory DB
 users_db = {}
 
 class User:
     def __init__(self, email, password, name):
         self.id = str(uuid.uuid4())
         self.email = email
-        self.password = password  # In production, hash this!
+        self.password = generate_password_hash(password)
         self.name = name
         self.created_at = datetime.utcnow().isoformat()
     
     def save(self):
         users_db[self.id] = self
         return self
+    
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
     
     @staticmethod
     def find_by_email(email):
