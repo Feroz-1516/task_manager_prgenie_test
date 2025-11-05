@@ -1,0 +1,36 @@
+import uuid
+from datetime import datetime
+
+# In-memory database (replace with real DB in production)
+users_db = {}
+
+class User:
+    def __init__(self, email, password, name):
+        self.id = str(uuid.uuid4())
+        self.email = email
+        self.password = password  # In production, hash this!
+        self.name = name
+        self.created_at = datetime.utcnow().isoformat()
+    
+    def save(self):
+        users_db[self.id] = self
+        return self
+    
+    @staticmethod
+    def find_by_email(email):
+        for user in users_db.values():
+            if user.email == email:
+                return user
+        return None
+    
+    @staticmethod
+    def find_by_id(user_id):
+        return users_db.get(user_id)
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'email': self.email,
+            'name': self.name,
+            'created_at': self.created_at
+        }
