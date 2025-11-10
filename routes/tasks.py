@@ -98,7 +98,10 @@ def update_task(current_user, task_id):
     task = Task.find_by_id(task_id)
     if not task or task.user_id != current_user['user_id']:
         return jsonify({'error': 'Task not found'}), 404
-    task.update(request.get_json())
+    data = request.get_json()
+    if data is None:
+        return jsonify({'error': 'Invalid request: No JSON body found'}), 400
+    task.update(data)
     return jsonify(task.to_dict()), 200
 
 @tasks_bp.route('/<task_id>', methods=['DELETE'])
