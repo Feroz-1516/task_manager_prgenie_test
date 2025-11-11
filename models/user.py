@@ -17,7 +17,7 @@ class User:
         users_db[self.id] = self
         return self
     
-    def check_password(self, password):
+    def is_password_valid(self, password):
         return check_password_hash(self.password, password)
     
     @staticmethod
