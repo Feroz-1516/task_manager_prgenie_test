@@ -33,7 +33,7 @@ def get_tasks(current_user):
     start, end = (page - 1) * limit, (page - 1) * limit + limit
     paginated = tasks[start:end]
 
-    return jsonify({'tasks': [t.to_dict() for t in paginated], 'page': page, 'total': len(tasks)}), 200
+    return jsonify({'tasks': [task.to_dict() for task in paginated], 'page': page, 'total': len(tasks)}), 200
 
 @tasks_bp.route('/stats', methods=['GET'])
 @token_required
