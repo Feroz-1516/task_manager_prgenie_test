@@ -98,7 +98,7 @@ class Task:
             'high_priority': len([t for t in user_tasks if t.priority == 'high']),
             'overdue': len(Task.get_overdue_tasks(user_id))
         }
-        stats['completion_rate'] = round((len([t for t in user_tasks if t.status == 'completed']) / stats['total']) * 100, 2) if stats['total'] else 0
+        stats['completion_rate'] = round((stats['completed'] / stats['total']) * 100, 2) if stats['total'] else 0
         return stats
 
     def to_dict(self):
