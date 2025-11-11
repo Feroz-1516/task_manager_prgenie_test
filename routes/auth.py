@@ -54,7 +54,7 @@ from middleware.auth import token_required
 
 @auth_bp.route('/refresh', methods=['POST'])
 @token_required
-def refresh(current_user):
+def refresh_token(current_user):
     token = jwt.encode({
         'user_id': current_user['user_id'],
         'email': current_user['email'],
