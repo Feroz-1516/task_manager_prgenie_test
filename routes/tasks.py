@@ -56,7 +56,7 @@ def get_insights(current_user):
     
     if completed:
         durations = []
-        for t in completed:
+        for task in completed:
             created = datetime.fromisoformat(t.created_at)
             updated = datetime.fromisoformat(t.updated_at)
             durations.append((updated - created).total_seconds())
