@@ -12,8 +12,8 @@ def get_tasks(current_user):
     priority = request.args.get('priority')
     sort_by = request.args.get('sortBy')
     search = request.args.get('search', '').lower()
-    page = int(request.args.get('page', 1))
-    limit = int(request.args.get('limit', 10))
+    page = request.args.get('page', 1, type=int)
+    limit = request.args.get('limit', 10, type=int)
 
     tasks = Task.get_by_user_id(current_user['user_id'])
 
