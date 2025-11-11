@@ -51,7 +51,7 @@ def get_overdue(current_user):
 @token_required
 def get_insights(current_user):
     tasks = Task.get_by_user_id(current_user['user_id'])
-    completed = [t for t in tasks if t.status == 'completed']
+    completed = [task for task in tasks if task.status == 'completed']
     avg_completion_time = None
     
     if completed:
