@@ -58,7 +58,7 @@ class Task:
             return None
         due_datetime = datetime.fromisoformat(self.due_date)
         if self.recurrence == 'daily':
-            return (dt + timedelta(days=1)).isoformat()
+            return (due_datetime + timedelta(days=1)).isoformat()
         elif self.recurrence == 'weekly':
             return (dt + timedelta(weeks=1)).isoformat()
         elif self.recurrence == 'monthly':
