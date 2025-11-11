@@ -56,7 +56,7 @@ class Task:
     def _get_next_due_date(self):
         if not self.due_date:
             return None
-        dt = datetime.fromisoformat(self.due_date)
+        due_datetime = datetime.fromisoformat(self.due_date)
         if self.recurrence == 'daily':
             return (dt + timedelta(days=1)).isoformat()
         elif self.recurrence == 'weekly':
