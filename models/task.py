@@ -60,7 +60,7 @@ class Task:
         if self.recurrence == 'daily':
             return (due_datetime + timedelta(days=1)).isoformat()
         elif self.recurrence == 'weekly':
-            return (dt + timedelta(weeks=1)).isoformat()
+            return (due_datetime + timedelta(weeks=1)).isoformat()
         elif self.recurrence == 'monthly':
             return (dt + timedelta(days=30)).isoformat()
         return None
