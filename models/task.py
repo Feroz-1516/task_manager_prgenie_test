@@ -62,7 +62,7 @@ class Task:
         elif self.recurrence == 'weekly':
             return (due_datetime + timedelta(weeks=1)).isoformat()
         elif self.recurrence == 'monthly':
-            return (dt + timedelta(days=30)).isoformat()
+            return (due_datetime + timedelta(days=30)).isoformat()
         return None
 
     def delete(self):

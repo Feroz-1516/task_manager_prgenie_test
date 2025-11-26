@@ -25,7 +25,7 @@ def get_tasks(current_user):
         tasks = [task for task in tasks if search in task.title.lower() or search in task.description.lower()]
     
     if sort_by == 'dueDate':
-        tasks.sort(key=lambda t: t.due_date or '')
+        tasks.sort(key=lambda task: task.due_date or '')
     elif sort_by == 'priority':
         priority_order = {'high': 3, 'medium': 2, 'low': 1}
         tasks.sort(key=lambda t: priority_order.get(t.priority, 0), reverse=True)
