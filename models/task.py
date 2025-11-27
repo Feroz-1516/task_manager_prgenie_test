@@ -18,52 +18,52 @@ class Task:
         self.recurrence = recurrence  # daily, weekly, monthly
         self.comments = []
 
-    def save(self):
-        tasks_db[self.id] = self
-        return self
+    # def save(self):
+    #     tasks_db[self.id] = self
+    #     return self
     
-    def update(self, data):
-        if 'title' in data:
-            self.title = data['title']
-        if 'description' in data:
-            self.description = data['description']
-        if 'priority' in data:
-            self.priority = data['priority']
-        if 'status' in data:
-            self.status = data['status']
-        if 'dueDate' in data:
-            self.due_date = data['dueDate']
-        if 'recurrence' in data:
-            self.recurrence = data['recurrence']
+    # def update(self, data):
+    #     if 'title' in data:
+    #         self.title = data['title']
+    #     if 'description' in data:
+    #         self.description = data['description']
+    #     if 'priority' in data:
+    #         self.priority = data['priority']
+    #     if 'status' in data:
+    #         self.status = data['status']
+    #     if 'dueDate' in data:
+    #         self.due_date = data['dueDate']
+    #     if 'recurrence' in data:
+    #         self.recurrence = data['recurrence']
         
-        # Handle recurrence auto-clone
-        if self.status == 'completed' and self.recurrence:
-            next_due = self._get_next_due_date()
-            new_task = Task(
-                user_id=self.user_id,
-                title=self.title,
-                description=self.description,
-                priority=self.priority,
-                due_date=next_due,
-                recurrence=self.recurrence
-            )
-            new_task.save()
+    #     # Handle recurrence auto-clone
+    #     if self.status == 'completed' and self.recurrence:
+    #         next_due = self._get_next_due_date()
+    #         new_task = Task(
+    #             user_id=self.user_id,
+    #             title=self.title,
+    #             description=self.description,
+    #             priority=self.priority,
+    #             due_date=next_due,
+    #             recurrence=self.recurrence
+    #         )
+    #         new_task.save()
 
-        self.updated_at = datetime.utcnow().isoformat()
-        self.save()
-        return self
+    #     self.updated_at = datetime.utcnow().isoformat()
+    #     self.save()
+    #     return self
     
-    def _get_next_due_date(self):
-        if not self.due_date:
-            return None
-        due_datetime = datetime.fromisoformat(self.due_date)
-        if self.recurrence == 'daily':
-            return (due_datetime + timedelta(days=1)).isoformat()
-        elif self.recurrence == 'weekly':
-            return (due_datetime + timedelta(weeks=1)).isoformat()
-        elif self.recurrence == 'monthly':
-            return (due_datetime + timedelta(days=30)).isoformat()
-        return None
+    # def _get_next_due_date(self):
+    #     if not self.due_date:
+    #         return None
+    #     due_datetime = datetime.fromisoformat(self.due_date)
+    #     if self.recurrence == 'daily':
+    #         return (due_datetime + timedelta(days=1)).isoformat()
+    #     elif self.recurrence == 'weekly':
+    #         return (due_datetime + timedelta(weeks=1)).isoformat()
+    #     elif self.recurrence == 'monthly':
+    #         return (due_datetime + timedelta(days=30)).isoformat()
+    #     return None
 
     def delete(self):
         if self.id in tasks_db:
