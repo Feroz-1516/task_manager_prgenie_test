@@ -108,4 +108,7 @@ def update_task(current_user, task_id):
 @token_required
 def delete_task(current_user, task_id):
     task = Task.find_by_id(task_id)
-    if not task o
+    if not task or task.user_id != current_user['user_id']:
+        return jsonify({'error': 'Task not found'}), 404
+    task.delete()
+    return jsonify({'message': 'Task deleted successfully'}), 200
