@@ -1,7 +1,6 @@
 from flask import Flask, jsonify
 from routes.auth import auth_bp
 from routes.tasks import tasks_bp
-from middleware.auth import token_required
 from datetime import datetime
 
 app = Flask(__name__)
@@ -27,4 +26,6 @@ def internal_error(error):
     return jsonify({'error': 'Internal server error'}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    is_debug_enabled = os.environ.get('FLASK_DEBUG', 'false').lower() in ('true', '1', 't')
+    port = int(os.environ.get('PORT', 5000))
+    app.run(debug=debug_mode, port=port)
