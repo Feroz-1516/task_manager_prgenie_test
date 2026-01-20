@@ -48,7 +48,7 @@ def login():
         'exp': datetime.utcnow() + timedelta(hours=24)
     }, current_app.config['SECRET_KEY'], algorithm='HS256')
     
-    return jsonify({'message': 'Login successful', 'token': token, 'user': user.to_dict()}), 200
+    return jsonify({'message': 'Login successful', 'token': token, 'user': {'id': user.id, 'email': user.email, 'name': user.name}}), 200
 
 from middleware.auth import token_required
 
