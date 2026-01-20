@@ -77,7 +77,7 @@ class Task:
     
     @staticmethod
     def get_by_user_id(user_id):
-        return [t for t in tasks_db.values() if t.user_id == user_id]
+        return [task for task in tasks_db.values() if task.user_id == user_id]
     
     @staticmethod
     def get_overdue_tasks(user_id):
