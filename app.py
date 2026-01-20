@@ -26,6 +26,6 @@ def internal_error(error):
     return jsonify({'error': 'Internal server error'}), 500
 
 if __name__ == '__main__':
-    debug_mode = os.environ.get('FLASK_DEBUG', 'false').lower() in ('true', '1', 't')
+    is_debug_enabled = os.environ.get('FLASK_DEBUG', 'false').lower() in ('true', '1', 't')
     port = int(os.environ.get('PORT', 5000))
     app.run(debug=debug_mode, port=port)
